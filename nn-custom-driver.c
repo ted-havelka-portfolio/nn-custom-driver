@@ -2,7 +2,7 @@
  * Iomico 2026 Zephyr Course sample driver source file
  */
 
-#define DT_DRV_COMPAT nn_custom_driver
+#define DT_DRV_COMPAT nn_driver
 
 #include "../include/nn-driver/nn-driver-custom.h"
 
