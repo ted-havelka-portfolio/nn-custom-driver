@@ -79,6 +79,7 @@ static inline int show_settings(const struct device *dev)
 	return api->show_settings(dev);
 }
 
-#include <syscalls/nn-driver-custom.h>
+// #include <Ysyscalls/nn-driver-custom.h>
+#include <zephyr/syscalls/nn-custom-driver.h>
 
 #endif // NN_DRIVER_CUSTOM_H
