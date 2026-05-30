@@ -2,11 +2,9 @@
  * Iomico 2026 Zephyr Course sample driver source file
  */
 
-#define DT_DRV_COMPAT nn_driver
+#define DT_DRV_COMPAT nn_custom_driver
 
 #include "../include/nn-driver/nn-driver-custom.h"
-// custom API support header:
-#include "../include/nn-driver/nn-driver.h"
 
 #include <zephyr/device.h>
 #include <zephyr/devicetree.h>
