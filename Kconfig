@@ -1,0 +1,11 @@
+config NN_DRIVER
+    bool "Custom example driver, treats LED as like a sensor"
+    default y
+    depends on DT_HAS_NN_DRIVER_ENABLED
+    help
+      Enable a simple exaple out-of-tree Zephyr driver, whose Zephyr sensor
+      API implementations turn off and turn on an LED.  While this is not what
+      sensor APIs would normally do, this code provides a visual feedback to
+      show that the driver is correctly written in all its languages and
+      file-wise elements:  driver bindings file, Kconfig, device tree overlay
+      and C sources.
