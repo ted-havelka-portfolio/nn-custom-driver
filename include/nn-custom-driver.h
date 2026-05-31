@@ -8,6 +8,10 @@
 #include <zephyr/drivers/sensor.h>
 #include <zephyr/internal/syscall_handler.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum nn_driver_led {
 	NN_DRIVER_LED_NONE,
 	NN_DRIVER_LED_1,
@@ -81,5 +85,9 @@ static inline int z_impl_show_settings(const struct device *dev)
 }
 
 #include <zephyr/syscalls/nn-custom-driver.h>
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // NN_DRIVER_CUSTOM_H
