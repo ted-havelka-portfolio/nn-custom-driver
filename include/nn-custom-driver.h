@@ -6,6 +6,7 @@
 #include <zephyr/device.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/sensor.h>
+#include <zephyr/internal/syscall_handler.h>
 
 enum nn_driver_led {
 	NN_DRIVER_LED_NONE,
@@ -79,7 +80,6 @@ static inline int show_settings(const struct device *dev)
 	return api->show_settings(dev);
 }
 
-// #include <Ysyscalls/nn-driver-custom.h>
 #include <zephyr/syscalls/nn-custom-driver.h>
 
 #endif // NN_DRIVER_CUSTOM_H
