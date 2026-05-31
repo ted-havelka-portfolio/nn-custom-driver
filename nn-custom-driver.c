@@ -16,7 +16,7 @@
 
 LOG_MODULE_REGISTER(nn_driver, LOG_LEVEL_INF);
 
-// static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(DT_ALIAS(driver_led1), gpios);
+static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(DT_ALIAS(driver_led1), gpios);
 
 //----------------------------------------------------------------------
 // - SECTION - Zephyr sensor API implemenations
