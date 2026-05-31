@@ -50,18 +50,11 @@ int nn_driver_custom_show_settings(const struct device *dev)
 	return 0;
 }
 
-#if 0
-static DEVICE_API(sensor, api_nn_driver) = {
-	.channel_get = nn_driver_channel_get,
-	.sample_fetch = nn_driver_sample_fetch,
-};
-#else
 static const struct nn_driver_custom_api nn_driver_api = {
 	.channel_get = nn_driver_custom_channel_get;
 	.sample_fetch = nn_driver_custom_sample_fetch;
 	.show_settings = nn_driver_custom_show_settings;
 };
-#endif
 
 //----------------------------------------------------------------------
 // - SECTION - initialization code
@@ -98,25 +91,17 @@ static int init(const struct device *dev)
 #define NN_DEVICE_DATA(inst) \
 	static struct nn_device_data nn_data_##inst = { 0 };
 
-#define NN_DEVICE_CONFIG(inst) \
-	static struct nn_device_config nn_config_##inst = { 0 };
-#if 0
-//	static struct nn_device_config nn_config_##inst = { \
-//		.show_settings = n n_driver_show_settings, \
-//		.set_active_led = NULL, \
-//		.set_id = NULL, \
-//	};
-#endif
+// #define NN_DEVICE_CONFIG(inst) \
+//	static struct nn_device_config nn_config_##inst = { 0 };
 
 #define NN_DEVICE_INIT(inst)                                              \
 	NN_DEVICE_DATA(inst)                                              \
-	NN_DEVICE_CONFIG(inst)                                            \
 	DEVICE_DT_INST_DEFINE(                                            \
 			0,                 /* device instance          */ \
 			init,              /* driver init function     */ \
 			NULL,              /* power management context */ \
 			&nn_data_##inst,   /* device data              */ \
-			&nn_config_##inst, /* device config            */ \
+			NULL, /* device config            */ \
 			POST_KERNEL,       /* initialization level     */ \
 			80,                /* initialization priority  */ \
 			&api_nn_driver     /* driver API               */ \
