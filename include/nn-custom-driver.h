@@ -6,8 +6,6 @@
 #include <zephyr/device.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/sensor.h>
-// how about . . .
-#include <zephyr/drivers/subsystem.h>
 
 enum nn_driver_led {
 	NN_DRIVER_LED_NONE,
