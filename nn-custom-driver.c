@@ -51,9 +51,9 @@ int nn_driver_custom_show_settings(const struct device *dev)
 }
 
 static const struct nn_driver_custom_api nn_driver_api = {
-	.channel_get = nn_driver_custom_channel_get;
-	.sample_fetch = nn_driver_custom_sample_fetch;
-	.show_settings = nn_driver_custom_show_settings;
+	.channel_get = nn_driver_custom_channel_get,
+	.sample_fetch = nn_driver_custom_sample_fetch,
+	.show_settings = nn_driver_custom_show_settings,
 };
 
 //----------------------------------------------------------------------
@@ -91,8 +91,10 @@ static int init(const struct device *dev)
 #define NN_DEVICE_DATA(inst) \
 	static struct nn_device_data nn_data_##inst = { 0 };
 
-// #define NN_DEVICE_CONFIG(inst) \
-//	static struct nn_device_config nn_config_##inst = { 0 };
+/*
+#define NN_DEVICE_CONFIG(inst) \
+static struct nn_device_config nn_config_##inst = { 0 };
+*/
 
 #define NN_DEVICE_INIT(inst)                                              \
 	NN_DEVICE_DATA(inst)                                              \
