@@ -22,7 +22,7 @@ static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(DT_ALIAS(driver_led1), g
 // - SECTION - Zephyr sensor API implemenations
 //----------------------------------------------------------------------
 
-static int nn_driver_custom_channel_get(const struct device *dev,
+static int nn_driver_channel_get(const struct device *dev,
 					enum sensor_channel chan,
 					struct sensor_value *val,
 					const struct gpio_dt_spec *led)
@@ -31,7 +31,7 @@ static int nn_driver_custom_channel_get(const struct device *dev,
 	return rc;
 }
 
-static int nn_driver_custom_sample_fetch(const struct device *dev,
+static int nn_driver_sample_fetch(const struct device *dev,
 					enum sensor_channel chan,
 					const struct gpio_dt_spec *led)
 {
@@ -39,7 +39,7 @@ static int nn_driver_custom_sample_fetch(const struct device *dev,
 	return rc;
 }
 
-int nn_driver_custom_show_settings(const struct device *dev)
+int nn_driver_show_settings(const struct device *dev)
 {
 	struct nn_device_data *data = dev->data;
 
@@ -50,10 +50,30 @@ int nn_driver_custom_show_settings(const struct device *dev)
 	return 0;
 }
 
+int nn_driver_set_id(const struct device *dev,
+                     const uint32_t id)
+{
+	// TODO [ ] Add null check of parameter 'dev'
+	struct nn_device_data *data = dev->data;
+	data->id = id;
+	return 0;
+}
+
+int nn_driver_select_led(const struct device *dev,
+                         const enum nn_driver_led_t led)
+{
+	// TODO [ ] Add null check of parameter 'dev'
+	struct nn_device_data *data = dev->data;
+	data->active_led = led;
+	return 0;
+}
+
 static const struct nn_driver_custom_api nn_driver_api = {
-	.channel_get = nn_driver_custom_channel_get,
-	.sample_fetch = nn_driver_custom_sample_fetch,
-	.show_settings = nn_driver_custom_show_settings,
+	.channel_get = nn_driver_channel_get,
+	.sample_fetch = nn_driver_sample_fetch,
+	.show_settings = nn_driver_show_settings,
+	.set_id = nn_driver_set_id,
+	.select_led = nn_driver_select_led,
 };
 
 //----------------------------------------------------------------------

@@ -1,5 +1,5 @@
-#ifndef NN_DRIVER_CUSTOM_H
-#define NN_DRIVER_CUSTOM_H
+#ifndef NN_CUSTOM_DRIVER_H
+#define NN_CUSTOM_DRIVER_H
 
 #include <stdint.h>
 
@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-enum nn_driver_led {
+enum nn_driver_led_t {
 	NN_DRIVER_LED_NONE,
 	NN_DRIVER_LED_1,
 	NN_DRIVER_LED_2,
@@ -35,10 +35,18 @@ typedef int (*custom_sample_fetch)(const struct device *dev,
 
 typedef int (*custom_show_settings)(const struct device *dev);
 
+typedef int (*custom_set_id)(const struct device *dev,
+			     const uint32_t id);
+
+typedef int (*custom_select_led)(const struct device *dev,
+				 const enum nn_driver_led_t led);
+
 __subsystem struct nn_driver_custom_api {
 	custom_channel_get channel_get;
 	custom_sample_fetch sample_fetch;
 	custom_show_settings show_settings;
+	custom_set_id set_id;
+	custom_select_led select_led;
 };
 
 __syscall int channel_get(const struct device *dev,
@@ -84,10 +92,36 @@ static inline int z_impl_show_settings(const struct device *dev)
 	return api->show_settings(dev);
 }
 
+__syscall int set_id(const struct device *dev,
+		     const uint32_t id);
+
+static inline int z_impl_set_id(const struct device *dev,
+				const uint32_t id)
+{
+	const struct nn_driver_custom_api *api = (const struct nn_driver_custom_api *)dev->api;
+	if (api->set_id == NULL) {
+                return -ENOSYS;
+        }
+	return api->set_id(dev, id);
+}
+
+__syscall int select_led(const struct device *dev,
+			 const enum nn_driver_led_t led);
+
+static inline int z_impl_select_led(const struct device *dev,
+				    const enum nn_driver_led_t led)
+{
+	const struct nn_driver_custom_api *api = (const struct nn_driver_custom_api *)dev->api;
+	if (api->select_led == NULL) {
+                return -ENOSYS;
+        }
+	return api->select_led(dev, led);
+}
+
 #include <zephyr/syscalls/nn-custom-driver.h>
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // NN_DRIVER_CUSTOM_H
+#endif // NN_CUSTOM_DRIVER_H
