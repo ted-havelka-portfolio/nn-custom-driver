@@ -4,7 +4,7 @@
 
 #define DT_DRV_COMPAT nn_driver
 
-#include "./include/nn-driver/nn-custom-driver.h"
+#include "./include/nn-custom-driver.h"
 
 #include <zephyr/device.h>
 #include <zephyr/devicetree.h>
