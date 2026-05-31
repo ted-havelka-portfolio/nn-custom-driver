@@ -101,10 +101,10 @@ static int init(const struct device *dev)
 			init,              /* driver init function     */ \
 			NULL,              /* power management context */ \
 			&nn_data_##inst,   /* device data              */ \
-			NULL, /* device config            */ \
+			NULL,              /* device config            */ \
 			POST_KERNEL,       /* initialization level     */ \
 			80,                /* initialization priority  */ \
-			&api_nn_driver     /* driver API               */ \
+			&nn_driver_api     /* driver API               */ \
 		 );
 
 #define NN_DEFINE(inst) \
