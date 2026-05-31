@@ -42,7 +42,7 @@ __syscall int channel_get(const struct device *dev,
                                         struct sensor_value *val,
                                         const struct gpio_dt_spec *led);
 
-static inline int channel_get(const struct device *dev,
+static inline int z_impl_channel_get(const struct device *dev,
 				enum sensor_channel chan,
 				struct sensor_value *val,
 				const struct gpio_dt_spec *led)
@@ -58,7 +58,7 @@ __syscall int sample_fetch(const struct device *dev,
 				enum sensor_channel chan,
 				const struct gpio_dt_spec *led);
 
-static inline int sample_fetch(const struct device *dev,
+static inline int z_impl_sample_fetch(const struct device *dev,
 				enum sensor_channel chan,
 				const struct gpio_dt_spec *led)
 {
@@ -71,7 +71,7 @@ static inline int sample_fetch(const struct device *dev,
 
 __syscall int show_settings(const struct device *dev);
 
-static inline int show_settings(const struct device *dev)
+static inline int z_impl_show_settings(const struct device *dev)
 {
 	const struct nn_driver_custom_api *api = (const struct nn_driver_custom_api *)dev->api;
         if (api->show_settings == NULL) {
